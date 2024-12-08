@@ -16,8 +16,17 @@ interface UploadedFile {
   fileUrl?: string;
 }
 
-const FolderPage = ({ params }: { params: { slug: string } }) => {
-  const { slug } = params;
+const FolderPage = ({ params }: { params: Promise<{ slug: string }> }) => {
+  const [slug, setSlug] = useState<string>("");
+
+  useEffect(() => {
+    const fetchSlug = async () => {
+      const resolvedParams = await params;
+      setSlug(resolvedParams.slug);
+    };
+    fetchSlug();
+  }, [params]);
+
   const [file, setFile] = useState<File | null>(null);
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [error, setError] = useState<string | null>(null);
