@@ -1,4 +1,5 @@
 import FolderTable from "@/components/folder-table";
+import FolderCardList from "@/components/card";
 
 const folderpage = () => {
     return (
@@ -8,6 +9,8 @@ const folderpage = () => {
                 Hello World
             </h1>
             <FolderTable />
+            <FolderCardList />
+
         </div>
     );
 }

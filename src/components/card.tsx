@@ -9,50 +9,21 @@ import {
 import { Button } from "./ui/button";
 import { EllipsisVertical } from "lucide-react";
 import Link from "next/link";
-import { format } from 'date-fns';
+import { format } from "date-fns";
+import { getfolders } from "@/lib/data";
 
-export interface FolderItemProps {
-  id: string;
-  name: string;
-  fileCount: number;
-  isPinned: boolean;
-  due_date: string; 
-  is_late: boolean; 
-  class_type?: string; 
-  onOpen: () => void;
-  onRename: (id: string, newName: string) => Promise<void>;
-  onDelete: () => void;
-  onPin: () => void;
-}
+const formatDueDate = (isoDate: string | null) => {
+  if (!isoDate) return null;
+  const date = new Date(isoDate);
+  return format(date, "d MMMM HH:mm");
+};
 
-const FolderItem = memo(function FolderItem({
-  id,
-  name,
-  fileCount,
-  isPinned,
-  due_date,
-  is_late,
-  class_type,
-  onOpen,
-  onRename,
-  onDelete,
-  onPin,
-}: FolderItemProps) {
-  // Fungsi untuk memformat due_date menjadi format yang diinginkan
-  const formatDueDate = (isoDate: string) => {
-    const date = new Date(isoDate);
-    return format(date, "d MMMM HH:mm");  // Menggunakan format internasional standar
-  };
-
-  // Formatkan due_date hanya jika ada
-  const formattedDueDate = due_date ? formatDueDate(due_date) : null;
+const FolderCard = memo(({ folder }: { folder: any }) => {
+  const { id, name, slug, due_date, class_type, is_late } = folder;
+  const formattedDueDate = formatDueDate(due_date);
 
   return (
-    <div
-      className={`p-4 rounded-lg border shadow-sm ${
-        isPinned ? "border-yellow-500" : "border-gray-200"
-      } bg-gray-100 hover:bg-gray-200 cursor-pointer group relative`}
-    >
+    <div className="relative p-4 border rounded-lg hover:shadow-md transition">
       {/* Bagian Gambar Folder */}
       <div className="flex justify-start mb-2">
         <img
@@ -64,10 +35,8 @@ const FolderItem = memo(function FolderItem({
 
       {/* Nama Folder */}
       <div className="text-left mb-2">
-        <Link href={`/folder/${name}`}>
-          <div onClick={onOpen}>
-            <h3 className="text-lg font-semibold">{name}</h3>
-          </div>
+        <Link href={`/folder/${slug}`}>
+          <h3 className="text-lg font-semibold hover:underline">{name}</h3>
         </Link>
       </div>
 
@@ -102,15 +71,15 @@ const FolderItem = memo(function FolderItem({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="z-10">
-            <DropdownMenuItem onClick={onPin}>
-              {isPinned ? "Unpin" : "Pin"}
+            <DropdownMenuItem onClick={() => console.log(`Pin ${id}`)}>
+              Pin
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onRename(id, name)}>
+            <DropdownMenuItem onClick={() => console.log(`Rename ${id}`)}>
               Rename
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={onDelete}
+              onClick={() => console.log(`Delete ${id}`)}
               className="text-red-500 font-semibold"
             >
               Delete
@@ -122,4 +91,16 @@ const FolderItem = memo(function FolderItem({
   );
 });
 
-export default FolderItem;
+const FolderCardList = async () => {
+  const folders = await getfolders();
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {folders.map((folder: any) => (
+        <FolderCard key={folder.id} folder={folder} />
+      ))}
+    </div>
+  );
+};
+
+export default FolderCardList;
