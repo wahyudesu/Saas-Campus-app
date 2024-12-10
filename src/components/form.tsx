@@ -14,7 +14,7 @@ interface TaskFormData {
   description: string;
 }
 
-export default function TaskCreationForm() {
+const TaskCreationForm = ({ onClose }: { onClose: () => void }) => {
   const [taskData, setTaskData] = useState<TaskFormData>({
     name_assignment: '',
     slug: '',
@@ -44,6 +44,7 @@ export default function TaskCreationForm() {
     
     // Handle result (you can show success or error messages here)
     console.log(result);  // Optionally log the result
+    onClose(); // Close the form after submission
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -55,8 +56,14 @@ export default function TaskCreationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+        >
+          &times;
+        </button>
         <h2 className="text-2xl font-bold mb-6 text-center">Buat Tugas Baru</h2>
         
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -146,4 +153,6 @@ export default function TaskCreationForm() {
       </div>
     </div>
   );
-}
+};
+
+export default TaskCreationForm;

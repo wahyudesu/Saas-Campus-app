@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/landingpage/hero-section";
 import PainCard from "@/components/landingpage/kotak";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import CTASection from "@/components/landingpage/cta";
+import FormAssignment from "@/components/createassignment";
 
 export default function DocumentStorage() {
   return (
@@ -13,6 +14,7 @@ export default function DocumentStorage() {
         <nav className="container mx-auto flex justify-between items-center px-4">
           <h1 className="text-2xl font-bold text-black-100">Campus app</h1>
           <ul className="flex space-x-6">
+            <FormAssignment/>
             <li className="hover:text-gray-400 cursor-pointer">Home</li>
             <li className="hover:text-gray-400 cursor-pointer">Features</li>
             <li className="hover:text-gray-400 cursor-pointer">Pricing</li>
@@ -23,6 +25,7 @@ export default function DocumentStorage() {
 
       {/* Hero Section */}
       <div className="">
+        <FormAssignment/>
         <HeroSection />
       </div>
 

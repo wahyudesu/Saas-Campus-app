@@ -3,7 +3,7 @@ import { Home, FileText, Settings, HelpCircle } from 'lucide-react'
 
 const navItems = [
   { icon: Home, label: 'Dashboard', href: '/dashboard' },
-  { icon: FileText, label: 'Daftar Tugas', href: '/folder' },
+  { icon: FileText, label: 'Daftar Tugas', href: '/assignment' },
   { icon: Settings, label: 'Kelas', href: '/kelas' },
   { icon: HelpCircle, label: 'Mahasiswa', href: '/mahasiswa' },
 ]

@@ -8,7 +8,6 @@ interface Folder {
   slug: string;
   created_at?: string;
   due_date?: string; // Optional due date
-  is_late: boolean;   // Status indicating if the folder is late
   class_type?: string; // Optional class type
 }
 
@@ -76,7 +75,7 @@ export const useFolders = () => {
       // Insert new folder
       const { data, error: insertError } = await supabase
         .from('folders')
-        .insert([{ name, slug, due_date: dueDate, is_late: isLate, class_type: classType }])
+        .insert([{ name, slug, due_date: dueDate, class_type: classType }])
         .select();
 
       if (insertError) throw insertError;
@@ -123,7 +122,7 @@ export const useFolders = () => {
       // Proceed with updating the folder
       const { data, error } = await supabase
         .from('folders')
-        .update({ name: newName, slug, due_date: dueDate, is_late: isLate, class_type: classType }) // Update with new values
+        .update({ name: newName, slug, due_date: dueDate, class_type: classType }) // Update with new values
         .eq('id', id)
         .select();
 

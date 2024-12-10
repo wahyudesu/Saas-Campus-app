@@ -18,11 +18,11 @@ model files {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model folders {
-  id         Int       @id @default(autoincrement())
-  name       String
-  slug       String    @unique
-  created_at DateTime? @default(now()) @db.Timestamptz(6)
-  due_date   DateTime? @db.Timestamptz(6)
-  is_late    Boolean?  @default(false)
-  class_type String?
+  id              Int       @id @default(autoincrement())
+  name_assignment String
+  created_at      DateTime? @default(now())
+  due_date        DateTime?
+  class_type      String?
+  description     String?
+  assignment_type String?
 }

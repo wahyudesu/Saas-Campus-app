@@ -19,7 +19,7 @@ const formatDueDate = (isoDate: string | null) => {
 };
 
 const FolderCard = memo(({ folder }: { folder: any }) => {
-  const { id, name, slug, due_date, class_type, is_late } = folder;
+  const { id, name_assignment, slug, due_date, class_type } = folder;
   const formattedDueDate = formatDueDate(due_date);
 
   return (
@@ -36,7 +36,7 @@ const FolderCard = memo(({ folder }: { folder: any }) => {
       {/* Nama Folder */}
       <div className="text-left mb-2">
         <Link href={`/folder/${slug}`}>
-          <h3 className="text-lg font-semibold hover:underline">{name}</h3>
+          <h3 className="text-lg font-semibold hover:underline">{name_assignment}</h3>
         </Link>
       </div>
 
@@ -47,11 +47,6 @@ const FolderCard = memo(({ folder }: { folder: any }) => {
 
       {/* Badge untuk Class Type dan Late Status */}
       <div className="flex justify-start flex-wrap gap-2">
-        {is_late && (
-          <span className="px-2 py-1 rounded-full bg-red-100 text-red-600 text-xs font-medium">
-            Late
-          </span>
-        )}
         {class_type && (
           <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-600 text-xs font-medium">
             {class_type}

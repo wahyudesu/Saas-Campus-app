@@ -1,66 +1,72 @@
-"use client"
+"use client";
 
-import React from 'react'
-import useSWR from 'swr'
-import FolderItem from '@/components/card'
+import React from "react";
+import Navbar from "@/components/navbar";
+import { AppSidebar } from "@/components/sidebar";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 
-interface Folder {
-  id: string
-  name: string
-  fileCount: number
-  isPinned: boolean
-  due_date: string | null
-  is_late: boolean
-  class_type?: string
-}
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
-
-const Home = () => {
-  const { data: folders, error } = useSWR<Folder[]>('/api/folders', fetcher)
-
-  if (error) return <div>Error loading folders</div>
-  if (!folders) return <div>Loading...</div>
-
-  const handleOpen = () => {
-    // Logic to open the folder
-  }
-
-  const handleRename = async (id: string, newName: string) => {
-    // Logic to rename the folder
-  }
-
-  const handleDelete = () => {
-    // Logic to delete the folder
-  }
-
-  const handlePin = () => {
-    // Logic to pin/unpin the folder
-  }
-
+export default function DocumentStorage() {
   return (
-    <div>
-      <h1>Folders</h1>
-      <div className="grid grid-cols-3 gap-4">
-        {folders.map((folder) => (
-          <FolderItem
-            key={folder.id}
-            id={folder.id}
-            name={folder.name}
-            fileCount={folder.fileCount}
-            isPinned={folder.isPinned}
-            due_date={folder.due_date || ''}
-            is_late={folder.is_late}
-            class_type={folder.class_type}
-            onOpen={handleOpen}
-            onRename={handleRename}
-            onDelete={handleDelete}
-            onPin={handlePin}
-          />
-        ))}
+    <div className="min-h-screen flex">
+      <AppSidebar />
+      <div className="flex-1 flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex items-start justify-center p-8">
+          <div className="w-full max-w-5xl">
+            <h1 className="text-2xl font-bold mb-8 text-center">Dashboard</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+              <Card className="bg-white shadow-md">
+                <CardHeader>
+                  <CardTitle>Card 1</CardTitle>
+                </CardHeader>
+                <CardContent />
+                <CardFooter />
+              </Card>
+
+              <Card className="bg-white shadow-md">
+                <CardHeader>
+                  <CardTitle>Card 2</CardTitle>
+                </CardHeader>
+                <CardContent />
+                <CardFooter />
+              </Card>
+
+              <Card className="bg-white shadow-md">
+                <CardHeader>
+                  <CardTitle>Card 3</CardTitle>
+                </CardHeader>
+                <CardContent />
+                <CardFooter />
+              </Card>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+              <Card className="bg-white shadow-md">
+                <CardHeader>
+                  <CardTitle>Card 1</CardTitle>
+                </CardHeader>
+                <CardContent />
+                <CardFooter />
+              </Card>
+
+              <Card className="bg-white shadow-md">
+                <CardHeader>
+                  <CardTitle>Card 2</CardTitle>
+                </CardHeader>
+                <CardContent />
+                <CardFooter />
+              </Card>
+
+              <Card className="bg-white shadow-md">
+                <CardHeader>
+                  <CardTitle>Card 3</CardTitle>
+                </CardHeader>
+                <CardContent />
+                <CardFooter />
+              </Card>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  )
+  );
 }
-
-export default Home
