@@ -1,3 +1,5 @@
+"use client"
+
 import Navbar from "@/components/navbar";
 import { AppSidebar } from "@/components/sidebar";
 import FolderCardList from "@/components/card";
