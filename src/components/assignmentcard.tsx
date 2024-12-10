@@ -1,3 +1,5 @@
+"use server"
+
 import { getfolders } from "@/lib/data";
 import FolderCard from "./card";
 

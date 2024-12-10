@@ -18,7 +18,7 @@ const FolderPage = () => {
                   <h1 className="text-2xl font-bold mb-8 text-center">Dashboard</h1>
                   <FormAssignment/>
                 </div>
-                <FolderCardList />
+                {/* <FolderCardList /> */}
               </div>
             </div>
           </div>
