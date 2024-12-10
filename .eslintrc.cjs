@@ -4,9 +4,9 @@ const config = {
   "parserOptions": {
     "project": true
   },
-  "extends": [
-    "next/core-web-vitals",
-  ],
+  // "extends": [
+  //   "next/core-web-vitals",
+  // ],
   "rules": {
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",

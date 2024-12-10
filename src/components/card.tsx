@@ -1,3 +1,5 @@
+"use client";
+
 import { memo } from "react";
 import {
   DropdownMenu,
@@ -10,7 +12,6 @@ import { Button } from "./ui/button";
 import { EllipsisVertical } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
-import { getfolders } from "@/lib/data";
 import Image from "next/image";
 
 const formatDueDate = (isoDate: string | null) => {
@@ -30,8 +31,8 @@ const FolderCard = memo(({ folder }: { folder: any }) => {
         <Image
           src="/open-folder.png"
           alt="Folder"
-          width={5}
-          height={5}
+          width={256}
+          height={256}
           className="w-16 h-16"
         />
       </div>
@@ -90,19 +91,4 @@ const FolderCard = memo(({ folder }: { folder: any }) => {
 });
 
 FolderCard.displayName = "FolderCard";
-
-const FolderCardList = async () => {
-  const folders = await getfolders();
-
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {folders.map((folder: any) => (
-        <FolderCard key={folder.id} folder={folder} />
-      ))}
-    </div>
-  );
-};
-
-FolderCardList.displayName = "FolderCardList";
-
-export default FolderCardList;
+export default FolderCard;

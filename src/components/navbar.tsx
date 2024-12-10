@@ -64,8 +64,8 @@ export default function Navbar() {
                   <Image
                     alt=""
                     src="/open-folder.png"
-                    width={256}
-                    height={256}
+                    width={20}
+                    height={20}
                     className="rounded-full"
                   />
                 </MenuButton>
