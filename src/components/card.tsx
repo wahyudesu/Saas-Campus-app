@@ -11,6 +11,7 @@ import { EllipsisVertical } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { getfolders } from "@/lib/data";
+import Image from "next/image";
 
 const formatDueDate = (isoDate: string | null) => {
   if (!isoDate) return null;
@@ -26,9 +27,11 @@ const FolderCard = memo(({ folder }: { folder: any }) => {
     <div className="relative p-4 border rounded-lg hover:shadow-md transition">
       {/* Bagian Gambar Folder */}
       <div className="flex justify-start mb-2">
-        <img
+        <Image
           src="/open-folder.png"
           alt="Folder"
+          width={5}
+          height={5}
           className="w-16 h-16"
         />
       </div>
@@ -86,6 +89,8 @@ const FolderCard = memo(({ folder }: { folder: any }) => {
   );
 });
 
+FolderCard.displayName = "FolderCard";
+
 const FolderCardList = async () => {
   const folders = await getfolders();
 
@@ -97,5 +102,7 @@ const FolderCardList = async () => {
     </div>
   );
 };
+
+FolderCardList.displayName = "FolderCardList";
 
 export default FolderCardList;

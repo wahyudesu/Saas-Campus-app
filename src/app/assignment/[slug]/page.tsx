@@ -33,8 +33,8 @@ const FolderPage = ({ params }: { params: Promise<{ slug: string }> }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // Supabase client setup
-  const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-  const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY || "";
+  const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+  const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "";
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
   const router = useRouter();
 
@@ -52,7 +52,7 @@ const FolderPage = ({ params }: { params: Promise<{ slug: string }> }) => {
         data?.map((file) => ({
           fileName: file.name,
           fileUrl: `${SUPABASE_URL}/storage/v1/object/public/Pdf%20document%20homework/${slug}/${file.name}`,
-        })) || [];
+        })) ?? [];
 
       setUploadedFiles(files);
     } catch (err) {
@@ -111,14 +111,14 @@ const FolderPage = ({ params }: { params: Promise<{ slug: string }> }) => {
       if (fileInput) fileInput.value = "";
     } catch (err) {
       const errorMessage = axios.isAxiosError(err)
-        ? err.response?.data?.error || "Network error occurred"
+        ? err.response?.data?.error ?? "Network error occurred"
         : "An unexpected error occurred";
       setError(errorMessage);
       console.error(err);
     } finally {
       setIsLoading(false);
     }
-  }, [file, slug]);
+  }, [file, slug, fetchFilesFromSupabase, supabase.storage]);
 
   const columns: ColumnDef<UploadedFile>[] = [
     {
@@ -181,7 +181,7 @@ const FolderPage = ({ params }: { params: Promise<{ slug: string }> }) => {
         </div>
 
         <div className="container mx-auto max-w-5xl px-4 py-8">
-          <h1 className="text-3xl font-bold mb-6 text-center">{slug || "Untitled"}</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">{slug ?? "Untitled"}</h1>
 
           <div className="bg-white shadow-md rounded-lg p-6">
             <div className="flex items-center space-x-4 mb-4">

@@ -20,9 +20,9 @@ const FolderTable = async () => {
                     <tr key={folder.id} className="border-b">
                         <td className="px-4 py-2">{folder.id}</td>
                         <td className="px-4 py-2">{folder.name_assignment}</td>
-                        <td className="px-4 py-2">{folder.assignment_type || 'N/A'}</td>
-                        <td className="px-4 py-2">{folder.due_date?.toString() || 'N/A'}</td>
-                        <td className="px-4 py-2">{folder.class_type || 'N/A'}</td>
+                        <td className="px-4 py-2">{folder.assignment_type ?? 'N/A'}</td>
+                        <td className="px-4 py-2">{folder.due_date?.toString() ?? 'N/A'}</td>
+                        <td className="px-4 py-2">{folder.class_type ?? 'N/A'}</td>
                     </tr>
                 ))}
             </tbody>

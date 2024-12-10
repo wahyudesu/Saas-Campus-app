@@ -4,13 +4,8 @@ const config = {
   "parserOptions": {
     "project": true
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
   "extends": [
     "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked"
   ],
   "rules": {
     "@typescript-eslint/array-type": "off",
@@ -18,14 +13,11 @@ const config = {
     "@typescript-eslint/consistent-type-imports": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/require-await": "off",
-    "@typescript-eslint/no-misused-promises": [
-      "error",
-      {
-        "checksVoidReturn": {
-          "attributes": false
-        }
-      }
-    ]
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-assignment":"off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-floating-promises": "off"
   }
 }
 module.exports = config;

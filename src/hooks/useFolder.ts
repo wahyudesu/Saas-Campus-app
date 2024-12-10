@@ -83,9 +83,9 @@ export const useFolders = () => {
       // Refresh folders list
       await fetchFolders('date');
 
-      return data?.[0] || null;
+      return data?.[0] ?? null;
     } catch (err: any) {
-      const errorMessage = err.message || "Failed to create folder.";
+      const errorMessage = err.message ?? "Failed to create folder.";
       setError(errorMessage);
       console.error(err);
       return null;
